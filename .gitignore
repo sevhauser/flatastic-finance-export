@@ -1,0 +1,7 @@
+*.json
+!config.example.json
+!package.json
+*.xlsx*
+node_modules/
+*.log
+*.lock

@@ -1,0 +1,17 @@
+{
+  "name": "flatastic-finance-export",
+  "private": true,
+  "version": "1.0.0",
+  "description": "BLUB",
+  "main": "index.js",
+  "author": "Severin Hauser <tiltedch@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "xlsx": "^0.15.1"
+  },
+  "scripts": {
+    "export": "node index.js",
+    "import": "node import.js"
+  }
+}
