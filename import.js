@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
+const signale = require('signale');
+
+signale.start('Starting import script');
 
 const PAGE_SIZE = 500;
 
@@ -9,7 +12,7 @@ const now = Math.floor(new Date().getTime() / 1000);
 
 function archiveFile(fileName) {
   if (fs.existsSync(path.join(process.cwd(), `${fileName}.json`))) {
-    console.log(`----> Archiving ${fileName}.json to archive/${fileName}_${now}.json`);
+    signale.info(`Archiving ${fileName}.json to archive/${fileName}_${now}.json`);
     fs.renameSync(
       path.join(process.cwd(), `${fileName}.json`),
       path.join(process.cwd(), 'archive', `${fileName}_${now}.json`),
@@ -18,28 +21,31 @@ function archiveFile(fileName) {
 }
 
 async function run(client) {
-  console.log('==== Archiving Old Data ====');
+  signale.start('Archiving old data');
   archiveFile('wg');
   archiveFile('cashflow');
-  console.log('==== Loading WG Data ====');
+  signale.complete('Archiving complete');
+  signale.start('Fetching WG data from API');
   try {
     const res = await client.get('wg');
     fs.writeFileSync(path.join(process.cwd(), 'wg.json'), JSON.stringify(res.data));
-    console.log('----> Successfully loaded WG Data, wrote to wg.json');
+    signale.success('Loaded WG data, wrote it to wg.json');
   } catch (e) {
-    console.error('!---> There was an error with the request!');
-    console.error(e);
+    signale.error('There was an error during the request!');
+    signale.error(e);
   }
+  signale.complete('Fetching of WG data complete');
 
-  console.log('==== Loading Cashflow Data ====');
+  signale.start('Fetching cashflow data from API');
   try {
     const res = await client.get(`cashflow?limit=${PAGE_SIZE}`);
     fs.writeFileSync(path.join(process.cwd(), 'cashflow.json'), JSON.stringify(res.data));
-    console.log('----> Successfully loaded Cashflow Data, wrote to cashflow.json');
+    signale.success('Loaded cashflow data, wrote it to cashflow.json');
   } catch (e) {
-    console.error('!---> There was an error with the request!');
-    console.error(e);
+    signale.error('There was an error with the request!');
+    signale.error(e);
   }
+  signale.complete('Fetching of cashflow data complete');
 }
 
 const instance = axios.create({
@@ -52,3 +58,4 @@ const instance = axios.create({
 });
 
 run(instance);
+signale.complete('Import completed');

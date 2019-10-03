@@ -1,5 +1,4 @@
 const XLSX = require('xlsx');
-const format = require('date-fns/format');
 
 class WGExport {
   constructor(data, wg) {
