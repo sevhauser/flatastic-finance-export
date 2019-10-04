@@ -5,8 +5,6 @@ Creates a nice XLSX export for your Flattastic expenses. Straight from the flata
 ## Requirements
 
 - [Node.js](https://nodejs.org/) >= `7.6.0` (tested with 10.16.3 LTS)
-
-or
 - [yarn](https://yarnpkg.com/lang/en/) (optional)
 
 ## Installation
