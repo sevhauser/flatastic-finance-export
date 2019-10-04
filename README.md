@@ -4,8 +4,10 @@ Creates a nice XLSX export for your Flattastic expenses. Straight from the flata
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/) >= `7.6.0` (I think, just install the latest release, or LTS and you're ok)
-- [yarn](https://yarnpkg.com/lang/en/) (optional, should work with npm)
+- [Node.js](https://nodejs.org/) >= `7.6.0` (tested with 10.16.3 LTS)
+
+or
+- [yarn](https://yarnpkg.com/lang/en/) (optional)
 
 ## Installation
 
@@ -22,7 +24,17 @@ Creates a nice XLSX export for your Flattastic expenses. Straight from the flata
 
 1. Open the [Flattastic Webapp](https://flatastic-app.com/webapp/) on your desktop browser
 2. Login with your account
-3. After a successful login open the developer tools (F12 on Firefox) and select the Storage tab (might be in the overflow menu)
+
+### Firefox:
+
+3. After a successful login open the developer tools (F12) and select the Storage tab (might be in the overflow menu)
 4. Under 'Local Storage' you'll find your API key in the field `apiKey` (see image below)
 
-![API Key Location in the developer tools](apikey.png)
+![API Key Location in the developer tools in Firefox](apikey.png)
+
+### Chrome:
+
+3. After a successful login open the developer tools (F12) and select the Application tab (might be in the overflow menu)
+4. Under 'Local Storage' you'll find your API key in the field `apiKey` (see image below)
+
+![API key location in the developer tools in Chrome](apikey_chrome.png)
